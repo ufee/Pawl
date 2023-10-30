@@ -6,7 +6,7 @@ use React\EventLoop\LoopInterface;
 use React\Socket\ConnectionInterface;
 use React\Socket\ConnectorInterface;
 use React\Promise\Deferred;
-use React\Promise\RejectedPromise;
+use React\Promise\Internal\RejectedPromise;
 use Psr\Http\Message\RequestInterface;
 use GuzzleHttp\Psr7 as gPsr;
 
@@ -38,7 +38,7 @@ class Connector {
         try {
             $request = $this->generateRequest($url, $subProtocols, $headers);
             $uri = $request->getUri();
-        } catch (\Exception $e) {
+        } catch (\Throwable $e) {
             return new RejectedPromise($e);
         }
         $secure = 'wss' === substr($url, 0, 3);
@@ -134,7 +134,7 @@ class Connector {
 
         $uri = $uri->withScheme('wss' === $scheme ? 'HTTPS' : 'HTTP');
 
-        $headers += ['User-Agent' => 'Ratchet-Pawl/0.4.1'];
+        $headers += ['User-Agent' => 'Ratchet-Pawl/0.4.2'];
 
         $request = array_reduce(array_keys($headers), function(RequestInterface $request, $header) use ($headers) {
             return $request->withHeader($header, $headers[$header]);
