@@ -1,5 +1,5 @@
 {
-    "name": "ratchet/pawl",
+    "name": "ufee/pawl",
     "description": "Asynchronous WebSocket client",
     "keywords": ["WebSocket", "Ratchet"],
     "license": "MIT",
